@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: shivam-printers-db
+    environment:
+      POSTGRES_DB: shivam_printers
+      POSTGRES_USER: shivam
+      POSTGRES_PASSWORD: shivam123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

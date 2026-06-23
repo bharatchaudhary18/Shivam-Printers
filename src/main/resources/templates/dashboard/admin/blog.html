@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: admin-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <h1 class="text-2xl font-bold mb-8" th:text="${pageTitle}">Blog Posts</h1>
+    <div class="space-y-4">
+        <div th:each="post : ${posts.content}" class="glass-card flex justify-between items-center">
+            <div><h3 class="font-semibold" th:text="${post.title}">Title</h3><p class="text-sm text-slate-400" th:text="${post.author}">Author</p></div>
+            <a th:href="@{/blog/{slug}(slug=${post.slug})}" class="text-brand-400 text-sm">View →</a>
+        </div>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

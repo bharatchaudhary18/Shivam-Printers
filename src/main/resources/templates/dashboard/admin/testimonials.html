@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: admin-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <h1 class="text-2xl font-bold mb-8" th:text="${pageTitle}">Testimonials</h1>
+    <div class="space-y-4">
+        <div th:each="t : ${testimonials.content}" class="glass-card">
+            <div class="flex gap-1 mb-2"><span th:each="i : ${#numbers.sequence(1, t.rating)}" class="text-amber-400">★</span></div>
+            <p class="text-slate-300 mb-3" th:text="${t.content}">Content</p>
+            <p class="font-semibold text-sm" th:text="${t.clientName + ' — ' + t.company}">Client</p>
+        </div>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: admin-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <h1 class="text-2xl font-bold mb-8" th:text="${pageTitle}">Contact Inquiries</h1>
+    <div class="space-y-4">
+        <div th:each="inquiry : ${inquiries.content}" class="glass-card">
+            <div class="flex justify-between items-start mb-2">
+                <div><h3 class="font-semibold" th:text="${inquiry.name}">Name</h3><p class="text-sm text-slate-400" th:text="${inquiry.email}">Email</p></div>
+                <span class="px-2 py-1 rounded bg-brand-500/20 text-brand-400 text-xs" th:text="${inquiry.status}">NEW</span>
+            </div>
+            <p class="text-sm text-slate-300" th:text="${inquiry.message}">Message</p>
+            <p class="text-xs text-slate-500 mt-2" th:text="${#temporals.format(inquiry.createdTimestamp, 'dd MMM yyyy HH:mm')}">Date</p>
+        </div>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head(${post.title})}"></head>
+<body class="gradient-bg mesh-bg">
+<div th:replace="~{layout/base :: header}"></div>
+<main class="pt-24 pb-20">
+    <article class="max-w-3xl mx-auto px-4 reveal">
+        <div class="glass-card">
+            <p class="text-brand-400 text-sm mb-2" th:text="${post.author}">Author</p>
+            <h1 class="text-4xl font-bold mb-6" th:text="${post.title}">Title</h1>
+            <div class="prose prose-invert max-w-none text-slate-300 leading-relaxed" th:utext="${post.content}">Content</div>
+        </div>
+        <div class="mt-8"><a href="/blog" class="btn-secondary">← Back to Blog</a></div>
+    </article>
+</main>
+<div th:replace="~{layout/base :: footer}"></div>
+<script th:replace="~{layout/base :: scripts}"></script>
+</body>
+</html>

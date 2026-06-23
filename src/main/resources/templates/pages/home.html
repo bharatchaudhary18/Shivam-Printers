@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head(${pageTitle})}"></head>
+<body class="gradient-bg mesh-bg">
+<div th:replace="~{layout/base :: header}"></div>
+
+<main class="pt-24">
+    <!-- Hero -->
+    <section class="relative min-h-[90vh] flex items-center overflow-hidden hero-gradient">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-brand-600/20 rounded-full blur-3xl animate-float"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-cyan/15 rounded-full blur-3xl animate-float" style="animation-delay: 2s"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="max-w-4xl">
+                <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-8 animate-fade-in">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    <span class="text-sm text-slate-300">Trusted by 500+ businesses across India</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 animate-slide-up">
+                    Premium Printing &amp;
+                    <span class="bg-gradient-to-r from-brand-400 via-accent-cyan to-accent-pink bg-clip-text text-transparent"> Design Excellence</span>
+                </h1>
+                <p class="text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed animate-slide-up animate-delay-100">
+                    Transform your brand with world-class graphic design, precision printing, and creative solutions crafted by Shivam Printers.
+                </p>
+                <div class="flex flex-wrap gap-4 animate-slide-up animate-delay-200">
+                    <a href="/contact" class="btn-primary">Start Your Project</a>
+                    <a href="/portfolio" class="btn-secondary">View Our Work</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <p class="text-brand-400 font-semibold mb-3">About Shivam Printers</p>
+                    <h2 class="section-heading mb-6">Crafting Visual Stories Since 2010</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">We are a full-service printing and graphic design studio combining artistic creativity with cutting-edge technology. From startups to enterprise brands, we deliver print and design solutions that make lasting impressions.</p>
+                    <a href="/about" class="btn-secondary">Learn More About Us</a>
+                </div>
+                <div class="glass-card relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800" alt="Design studio" class="rounded-xl w-full object-cover aspect-[4/3]"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent rounded-xl"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <p class="text-brand-400 font-semibold mb-3">Our Services</p>
+                <h2 class="section-heading mb-4">Everything You Need to Stand Out</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">Comprehensive design and printing services tailored to your brand.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div th:each="service : ${services}" class="glass-card group cursor-pointer">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500/20 to-accent-cyan/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="text-brand-400 text-xl">✦</span>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2" th:text="${service.name}">Service</h3>
+                    <p class="text-sm text-slate-400 mb-4" th:text="${service.shortDescription}">Description</p>
+                    <a th:href="@{/services/{slug}(slug=${service.slug})}" class="text-brand-400 text-sm font-medium hover:text-brand-300 transition">Learn more →</a>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="/services" class="btn-primary">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-heading mb-4">Why Choose Shivam Printers</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-card text-center">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="font-semibold text-lg mb-2">Lightning Fast</h3>
+                    <p class="text-slate-400 text-sm">Express turnaround without compromising on quality. Most projects delivered within 48 hours.</p>
+                </div>
+                <div class="glass-card text-center">
+                    <div class="text-4xl mb-4">🎨</div>
+                    <h3 class="font-semibold text-lg mb-2">Award-Winning Design</h3>
+                    <p class="text-slate-400 text-sm">Our creative team brings years of experience in branding, print, and digital design.</p>
+                </div>
+                <div class="glass-card text-center">
+                    <div class="text-4xl mb-4">💎</div>
+                    <h3 class="font-semibold text-lg mb-2">Premium Quality</h3>
+                    <p class="text-slate-400 text-sm">State-of-the-art printing equipment and premium materials for flawless results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Preview -->
+    <section class="py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
+                <div>
+                    <p class="text-brand-400 font-semibold mb-3">Portfolio</p>
+                    <h2 class="section-heading">Featured Projects</h2>
+                </div>
+                <a href="/portfolio" class="btn-secondary">View Full Portfolio</a>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a th:each="item : ${portfolios}" th:href="@{/portfolio/{slug}(slug=${item.slug})}"
+                   class="portfolio-card glass-card p-0 overflow-hidden group relative zoom-container">
+                    <img th:src="${item.imageUrl}" th:alt="${item.title}" class="w-full aspect-[4/3] object-cover"/>
+                    <div class="portfolio-overlay absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/50 to-transparent flex items-end p-6">
+                        <div>
+                            <p class="text-brand-400 text-sm mb-1" th:text="${item.categoryName}">Category</p>
+                            <h3 class="font-semibold text-lg" th:text="${item.title}">Title</h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div><div class="text-4xl md:text-5xl font-bold text-brand-400 stat-counter" data-counter="500">0</div><p class="text-slate-400 mt-2">Happy Clients</p></div>
+                <div><div class="text-4xl md:text-5xl font-bold text-brand-400 stat-counter" data-counter="2500">0</div><p class="text-slate-400 mt-2">Projects Done</p></div>
+                <div><div class="text-4xl md:text-5xl font-bold text-brand-400 stat-counter" data-counter="15">0</div><p class="text-slate-400 mt-2">Years Experience</p></div>
+                <div><div class="text-4xl md:text-5xl font-bold text-brand-400 stat-counter" data-counter="50">0</div><p class="text-slate-400 mt-2">Team Members</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-heading mb-4">What Our Clients Say</h2>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div th:each="t : ${testimonials}" class="testimonial-card glass-card">
+                    <div class="flex gap-1 mb-4">
+                        <span th:each="i : ${#numbers.sequence(1, t.rating)}" class="text-amber-400">★</span>
+                    </div>
+                    <p class="text-slate-300 leading-relaxed mb-6" th:text="'&quot;' + ${t.content} + '&quot;'">Quote</p>
+                    <div>
+                        <p class="font-semibold" th:text="${t.clientName}">Name</p>
+                        <p class="text-sm text-slate-400" th:text="${t.designation + ', ' + t.company}">Role</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Preview -->
+    <section class="py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="section-heading mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-slate-400">Choose the plan that fits your needs</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <div class="glass-card">
+                    <h3 class="font-semibold text-lg mb-2">Starter</h3>
+                    <div class="text-3xl font-bold mb-4">₹999<span class="text-sm text-slate-400 font-normal">/project</span></div>
+                    <ul class="space-y-3 text-sm text-slate-400 mb-8">
+                        <li>✓ Basic design services</li>
+                        <li>✓ 2 revisions</li>
+                        <li>✓ Digital delivery</li>
+                    </ul>
+                    <a href="/pricing" class="btn-secondary w-full text-center">View Details</a>
+                </div>
+                <div class="glass-card pricing-featured border-2 relative">
+                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-brand-600 text-xs font-semibold px-3 py-1 rounded-full">Popular</span>
+                    <h3 class="font-semibold text-lg mb-2">Professional</h3>
+                    <div class="text-3xl font-bold mb-4">₹4,999<span class="text-sm text-slate-400 font-normal">/project</span></div>
+                    <ul class="space-y-3 text-sm text-slate-400 mb-8">
+                        <li>✓ Full design suite</li>
+                        <li>✓ Unlimited revisions</li>
+                        <li>✓ Print-ready files</li>
+                        <li>✓ Priority support</li>
+                    </ul>
+                    <a href="/pricing" class="btn-primary w-full text-center">Get Started</a>
+                </div>
+                <div class="glass-card">
+                    <h3 class="font-semibold text-lg mb-2">Enterprise</h3>
+                    <div class="text-3xl font-bold mb-4">Custom</div>
+                    <ul class="space-y-3 text-sm text-slate-400 mb-8">
+                        <li>✓ Dedicated account manager</li>
+                        <li>✓ Bulk printing discounts</li>
+                        <li>✓ Brand guidelines</li>
+                    </ul>
+                    <a href="/contact" class="btn-secondary w-full text-center">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 reveal">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <div class="glass-card py-16 px-8 hero-gradient">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Elevate Your Brand?</h2>
+                <p class="text-slate-400 mb-8 max-w-xl mx-auto">Let's create something extraordinary together. Get a free consultation today.</p>
+                <a href="/contact" class="btn-primary">Get Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-24 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="section-heading mb-6">Get In Touch</h2>
+                    <p class="text-slate-400 mb-8">Have a project in mind? We'd love to hear from you.</p>
+                    <div class="space-y-4 text-slate-400">
+                        <p>📍 Mandar, Reoder, Sirohi, 307513</p>
+                        <p>📞 +91 88888 88888</p>
+                        <p>✉️ shivamprinters2024@gmail.com</p>
+                    </div>
+                </div>
+                <div class="glass-card">
+                    <a href="/contact" class="btn-primary w-full text-center block">Send Us a Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="~{layout/base :: footer}"></div>
+<script th:replace="~{layout/base :: scripts}"></script>
+</body>
+</html>

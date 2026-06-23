@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: customer-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <h1 class="text-2xl font-bold mb-8" th:text="${pageTitle}">Invoices</h1>
+    <div class="glass-card overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead><tr class="border-b border-white/10"><th class="text-left py-3 px-4">Order #</th><th class="text-left py-3">Status</th><th class="text-right py-3">Amount</th><th class="text-right py-3">Action</th></tr></thead>
+            <tbody>
+                <tr th:each="order : ${orders.content}" class="border-b border-white/5">
+                    <td class="py-3 px-4" th:text="${order.orderNumber}">Order</td>
+                    <td class="py-3"><span class="px-2 py-1 rounded-lg bg-brand-500/20 text-brand-400 text-xs" th:text="${order.status}">Status</span></td>
+                    <td class="py-3 text-right" th:text="'₹' + ${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')}">₹0</td>
+                    <td class="py-3 text-right"><a th:href="@{/dashboard/invoices/{id}/download(id=${order.id})}" class="text-brand-400 hover:text-brand-300 text-sm">Download PDF</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

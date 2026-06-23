@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head(${portfolio.title})}"></head>
+<body class="gradient-bg mesh-bg">
+<div th:replace="~{layout/base :: header}"></div>
+<main class="pt-24 pb-20">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-card p-0 overflow-hidden mb-8 reveal zoom-container">
+            <img th:src="${portfolio.imageUrl}" th:alt="${portfolio.title}" class="w-full max-h-[600px] object-cover cursor-zoom-in" data-zoom="true"/>
+        </div>
+        <div class="glass-card reveal">
+            <p class="text-brand-400 text-sm mb-2" th:text="${portfolio.categoryName}">Category</p>
+            <h1 class="text-4xl font-bold mb-4" th:text="${portfolio.title}">Title</h1>
+            <div class="flex gap-4 text-sm text-slate-400 mb-6">
+                <span th:if="${portfolio.client}" th:text="'Client: ' + ${portfolio.client}">Client</span>
+            </div>
+            <p class="text-slate-300 leading-relaxed" th:text="${portfolio.description}">Description</p>
+        </div>
+        <div class="mt-12 reveal">
+            <h2 class="text-2xl font-bold mb-6">Related Projects</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <a th:each="item : ${related}" th:if="${item.slug != portfolio.slug}" th:href="@{/portfolio/{slug}(slug=${item.slug})}"
+                   class="glass-card p-0 overflow-hidden zoom-container">
+                    <img th:src="${item.thumbnailUrl != null ? item.thumbnailUrl : item.imageUrl}" th:alt="${item.title}" class="w-full aspect-video object-cover"/>
+                    <div class="p-4"><h3 class="font-semibold" th:text="${item.title}">Title</h3></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layout/base :: footer}"></div>
+<script th:replace="~{layout/base :: scripts}"></script>
+</body>
+</html>

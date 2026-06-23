@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head(${service.name})}"></head>
+<body class="gradient-bg mesh-bg">
+<div th:replace="~{layout/base :: header}"></div>
+<main class="pt-24 pb-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="glass-card reveal">
+            <p class="text-brand-400 font-semibold mb-2">Service</p>
+            <h1 class="text-4xl font-bold mb-6" th:text="${service.name}">Service Name</h1>
+            <p class="text-slate-400 leading-relaxed mb-8" th:text="${service.description}">Description</p>
+            <div class="flex flex-wrap gap-4">
+                <span class="glass px-4 py-2 rounded-lg text-brand-400 font-semibold" th:if="${service.basePrice != null}"
+                      th:text="'Starting at ₹' + ${#numbers.formatDecimal(service.basePrice, 0, 'COMMA', 0, 'POINT')}">Price</span>
+                <a href="/contact" class="btn-primary">Request Quote</a>
+                <a href="/dashboard/orders/new" class="btn-secondary">Place Order</a>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layout/base :: footer}"></div>
+<script th:replace="~{layout/base :: scripts}"></script>
+</body>
+</html>

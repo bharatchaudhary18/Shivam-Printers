@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head(pageTitle)">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" th:content="${pageDescription != null ? pageDescription : 'Shivam Printers - Premium printing and graphic design services. Logo design, flex printing, wedding cards, and more.'}"/>
+    <meta name="keywords" content="printing, graphic design, logo design, flex printing, wedding cards, Shivam Printers"/>
+    <meta name="author" content="Shivam Printers"/>
+    <meta property="og:title" th:content="${pageTitle != null ? pageTitle + ' | Shivam Printers' : 'Shivam Printers'}"/>
+    <meta property="og:description" content="Premium printing and graphic design services"/>
+    <meta property="og:type" content="website"/>
+    <title th:text="${pageTitle != null ? pageTitle + ' | Shivam Printers' : 'Shivam Printers | Premium Printing & Design'}">Shivam Printers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" th:href="@{/css/tailwind.css}"/>
+    <link rel="stylesheet" th:href="@{/css/app.css}"/>
+</head>
+<body>
+
+<header th:fragment="header" id="main-nav" class="fixed top-0 left-0 right-0 z-50 glass transition-all duration-300 py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-cyan flex items-center justify-center shadow-glow group-hover:scale-105 transition-transform">
+                    <span class="text-white font-bold text-lg">SP</span>
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-tight">Shivam Printers</span>
+                    <span class="hidden sm:block text-xs text-slate-400">Premium Design Studio</span>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="/" class="nav-link">Home</a>
+                <a href="/about" class="nav-link">About</a>
+                <a href="/services" class="nav-link">Services</a>
+                <a href="/portfolio" class="nav-link">Portfolio</a>
+                <a href="/pricing" class="nav-link">Pricing</a>
+                <a href="/blog" class="nav-link">Blog</a>
+                <a href="/contact" class="nav-link">Contact</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" type="button" class="p-2 rounded-lg glass hover:bg-white/10 transition" aria-label="Toggle theme">
+                    <svg class="w-5 h-5 dark-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                </button>
+                <div sec:authorize="!isAuthenticated()" class="hidden sm:flex items-center gap-2">
+                    <a href="/login" class="btn-secondary text-sm px-4 py-2">Login</a>
+                    <a href="/register" class="btn-primary text-sm px-4 py-2">Get Started</a>
+                </div>
+                <div sec:authorize="isAuthenticated()" class="hidden sm:flex items-center gap-2">
+                    <a sec:authorize="hasRole('ADMIN')" href="/admin" class="btn-secondary text-sm px-4 py-2">Admin</a>
+                    <a href="/dashboard" class="btn-primary text-sm px-4 py-2">Dashboard</a>
+                </div>
+                <button id="mobile-menu-btn" type="button" class="lg:hidden p-2 rounded-lg glass" aria-label="Menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden mt-4 pb-4 border-t border-white/10 pt-4">
+            <nav class="flex flex-col gap-3">
+                <a href="/" class="nav-link py-2">Home</a>
+                <a href="/about" class="nav-link py-2">About</a>
+                <a href="/services" class="nav-link py-2">Services</a>
+                <a href="/portfolio" class="nav-link py-2">Portfolio</a>
+                <a href="/pricing" class="nav-link py-2">Pricing</a>
+                <a href="/blog" class="nav-link py-2">Blog</a>
+                <a href="/contact" class="nav-link py-2">Contact</a>
+                <a sec:authorize="!isAuthenticated()" href="/login" class="btn-secondary text-center mt-2">Login</a>
+                <a sec:authorize="!isAuthenticated()" href="/register" class="btn-primary text-center">Register</a>
+                <a sec:authorize="isAuthenticated()" href="/dashboard" class="btn-primary text-center">Dashboard</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<footer th:fragment="footer" class="border-t border-white/10 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-accent-cyan flex items-center justify-center">
+                        <span class="text-white font-bold">SP</span>
+                    </div>
+                    <span class="text-xl font-bold">Shivam Printers</span>
+                </div>
+                <p class="text-slate-400 max-w-md leading-relaxed">Premium printing and graphic design studio crafting exceptional brand experiences. From logos to large-format printing, we deliver excellence.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-slate-400">
+                    <li><a href="/services" class="hover:text-brand-400 transition">Services</a></li>
+                    <li><a href="/portfolio" class="hover:text-brand-400 transition">Portfolio</a></li>
+                    <li><a href="/pricing" class="hover:text-brand-400 transition">Pricing</a></li>
+                    <li><a href="/blog" class="hover:text-brand-400 transition">Blog</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold mb-4">Contact</h4>
+                <ul class="space-y-2 text-slate-400">
+                    <li>info@shivamprinters.com</li>
+                    <li>+91 98765 43210</li>
+                    <li>Mumbai, Maharashtra, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-white/10 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+            <p>&copy; 2026 Shivam Printers. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="/api/swagger-ui.html" class="hover:text-brand-400 transition">API Docs</a>
+                <a href="/about" class="hover:text-brand-400 transition">About</a>
+                <a href="/contact" class="hover:text-brand-400 transition">Contact</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script th:fragment="scripts" th:src="@{/js/main.js}"></script>
+</body>
+</html>

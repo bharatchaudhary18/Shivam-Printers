@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: customer-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <h1 class="text-2xl font-bold mb-8" th:text="${pageTitle}">Notifications</h1>
+    <div class="space-y-4">
+        <div th:each="n : ${notifications.content}" class="glass-card flex items-start gap-4" th:classappend="${!n.read ? 'border-brand-500/30' : ''}">
+            <div class="w-2 h-2 rounded-full mt-2" th:classappend="${!n.read ? 'bg-brand-400' : 'bg-transparent'}"></div>
+            <div class="flex-1">
+                <h3 class="font-semibold" th:text="${n.title}">Title</h3>
+                <p class="text-slate-400 text-sm mt-1" th:text="${n.message}">Message</p>
+                <p class="text-xs text-slate-500 mt-2" th:text="${#temporals.format(n.createdTimestamp, 'dd MMM yyyy HH:mm')}">Date</p>
+            </div>
+        </div>
+        <div th:if="${notifications.empty}" class="glass-card text-center text-slate-400 py-12">No notifications yet</div>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

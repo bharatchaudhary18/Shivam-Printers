@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: customer-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-bold" th:text="${pageTitle}">Orders</h1>
+        <a href="/dashboard/orders/new" class="btn-primary text-sm">New Request</a>
+    </div>
+    <div class="glass-card overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead><tr class="border-b border-white/10"><th class="text-left py-3 px-4">Order #</th><th class="text-left py-3">Status</th><th class="text-left py-3">Items</th><th class="text-right py-3">Total</th><th class="text-right py-3">Date</th></tr></thead>
+            <tbody>
+                <tr th:each="order : ${orders.content}" class="border-b border-white/5 hover:bg-white/5">
+                    <td class="py-3 px-4 font-medium" th:text="${order.orderNumber}">Order</td>
+                    <td class="py-3"><span class="px-2 py-1 rounded-lg bg-brand-500/20 text-brand-400 text-xs" th:text="${order.status}">Status</span></td>
+                    <td class="py-3 text-slate-400" th:text="${#lists.size(order.items)} + ' item(s)'">1</td>
+                    <td class="py-3 text-right" th:text="'₹' + ${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')}">₹0</td>
+                    <td class="py-3 text-right text-slate-400" th:text="${#temporals.format(order.createdTimestamp, 'dd MMM yyyy')}">Date</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

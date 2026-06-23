@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head(${pageTitle})}"></head>
+<body class="gradient-bg mesh-bg">
+<div th:replace="~{layout/base :: header}"></div>
+<main class="pt-24 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h1 class="section-heading mb-4">Pricing Plans</h1>
+            <p class="text-slate-400">Transparent pricing for every budget</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mb-16 reveal">
+            <div class="glass-card"><h3 class="font-bold text-lg mb-2">Starter</h3><div class="text-3xl font-bold text-brand-400 mb-4">₹999</div><ul class="text-sm text-slate-400 space-y-2"><li>✓ 1 Design concept</li><li>✓ 2 Revisions</li><li>✓ Digital files</li></ul></div>
+            <div class="glass-card pricing-featured border-2"><h3 class="font-bold text-lg mb-2">Professional</h3><div class="text-3xl font-bold text-brand-400 mb-4">₹4,999</div><ul class="text-sm text-slate-400 space-y-2"><li>✓ 3 Design concepts</li><li>✓ Unlimited revisions</li><li>✓ Print-ready files</li><li>✓ Priority support</li></ul></div>
+            <div class="glass-card"><h3 class="font-bold text-lg mb-2">Enterprise</h3><div class="text-3xl font-bold text-brand-400 mb-4">Custom</div><ul class="text-sm text-slate-400 space-y-2"><li>✓ Dedicated manager</li><li>✓ Bulk discounts</li><li>✓ Brand guidelines</li></ul></div>
+        </div>
+        <div class="reveal">
+            <h2 class="text-2xl font-bold mb-8 text-center">Service Pricing</h2>
+            <div class="glass-card overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead><tr class="border-b border-white/10"><th class="text-left py-3 px-4">Service</th><th class="text-right py-3 px-4">Starting Price</th></tr></thead>
+                    <tbody>
+                        <tr th:each="service : ${services}" class="border-b border-white/5 hover:bg-white/5">
+                            <td class="py-3 px-4" th:text="${service.name}">Service</td>
+                            <td class="py-3 px-4 text-right text-brand-400 font-semibold"
+                                th:text="${service.basePrice != null ? '₹' + #numbers.formatDecimal(service.basePrice, 0, 'COMMA', 0, 'POINT') : 'Custom'}">Price</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layout/base :: footer}"></div>
+<script th:replace="~{layout/base :: scripts}"></script>
+</body>
+</html>

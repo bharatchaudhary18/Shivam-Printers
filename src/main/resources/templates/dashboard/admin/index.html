@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: admin-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <h1 class="text-2xl font-bold mb-8" th:text="${pageTitle}">Admin Dashboard</h1>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="glass-card"><p class="text-slate-400 text-sm">Total Users</p><p class="text-3xl font-bold mt-2 text-brand-400" th:text="${stats.totalUsers}">0</p></div>
+        <div class="glass-card"><p class="text-slate-400 text-sm">Total Orders</p><p class="text-3xl font-bold mt-2 text-brand-400" th:text="${stats.totalOrders}">0</p></div>
+        <div class="glass-card"><p class="text-slate-400 text-sm">Pending Orders</p><p class="text-3xl font-bold mt-2 text-amber-400" th:text="${stats.pendingOrders}">0</p></div>
+        <div class="glass-card"><p class="text-slate-400 text-sm">Revenue</p><p class="text-3xl font-bold mt-2 text-green-400" th:text="'₹' + ${#numbers.formatDecimal(stats.totalRevenue, 0, 'COMMA', 0, 'POINT')}">₹0</p></div>
+    </div>
+    <div class="grid lg:grid-cols-3 gap-6">
+        <div class="glass-card"><p class="text-slate-400 text-sm">Orders (30 days)</p><p class="text-2xl font-bold mt-2" th:text="${stats.ordersLast30Days}">0</p></div>
+        <div class="glass-card"><p class="text-slate-400 text-sm">New Inquiries</p><p class="text-2xl font-bold mt-2" th:text="${stats.newInquiries}">0</p></div>
+        <div class="glass-card"><p class="text-slate-400 text-sm">Published Posts</p><p class="text-2xl font-bold mt-2" th:text="${stats.publishedPosts}">0</p></div>
+    </div>
+    <div class="mt-8 flex gap-4">
+        <a href="/admin/orders" class="btn-primary text-sm">Manage Orders</a>
+        <a href="/admin/users" class="btn-secondary text-sm">Manage Users</a>
+        <a href="/api/swagger-ui.html" class="btn-secondary text-sm">API Docs</a>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: admin-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-2xl font-bold" th:text="${pageTitle}">Users</h1>
+        <form action="/admin/users" method="get" class="flex gap-2">
+            <input type="text" name="q" th:value="${searchQuery}" placeholder="Search users..." class="input-field w-64"/>
+            <button type="submit" class="btn-secondary text-sm">Search</button>
+        </form>
+    </div>
+    <div class="glass-card overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead><tr class="border-b border-white/10"><th class="text-left py-3 px-4">Name</th><th class="text-left py-3">Email</th><th class="text-left py-3">Roles</th><th class="text-right py-3">Joined</th></tr></thead>
+            <tbody>
+                <tr th:each="user : ${users.content}" class="border-b border-white/5">
+                    <td class="py-3 px-4" th:text="${user.firstName + ' ' + user.lastName}">Name</td>
+                    <td class="py-3" th:text="${user.email}">Email</td>
+                    <td class="py-3"><span th:each="role : ${user.roles}" class="px-2 py-1 rounded bg-brand-500/20 text-brand-400 text-xs mr-1" th:text="${role}">Role</span></td>
+                    <td class="py-3 text-right text-slate-400" th:text="${#temporals.format(user.createdTimestamp, 'dd MMM yyyy')}">Date</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

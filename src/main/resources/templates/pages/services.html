@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head(${pageTitle})}"></head>
+<body class="gradient-bg mesh-bg">
+<div th:replace="~{layout/base :: header}"></div>
+<main class="pt-24 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal">
+            <h1 class="section-heading mb-4">Our Services</h1>
+            <p class="text-slate-400 max-w-2xl mx-auto">Complete design and printing solutions for every business need.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div th:each="service : ${services}" class="glass-card group hover:scale-[1.02] transition-transform reveal">
+                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-brand-500/30 to-accent-cyan/20 flex items-center justify-center mb-6 text-2xl">✦</div>
+                <h2 class="text-xl font-bold mb-3" th:text="${service.name}">Service</h2>
+                <p class="text-slate-400 text-sm mb-4 leading-relaxed" th:text="${service.description}">Description</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-brand-400 font-semibold" th:if="${service.basePrice != null}" th:text="'From ₹' + ${#numbers.formatDecimal(service.basePrice, 0, 'COMMA', 0, 'POINT')}">Price</span>
+                    <a th:href="@{/services/{slug}(slug=${service.slug})}" class="text-sm text-brand-400 hover:text-brand-300">Details →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layout/base :: footer}"></div>
+<script th:replace="~{layout/base :: scripts}"></script>
+</body>
+</html>

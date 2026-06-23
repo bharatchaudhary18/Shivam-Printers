@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{dashboard/layout :: dashboard-head(${pageTitle})}"></head>
+<body class="gradient-bg min-h-screen">
+<div th:replace="~{dashboard/layout :: customer-sidebar}"></div>
+<div class="lg:ml-64 p-6 lg:p-8">
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-2xl font-bold" th:text="${pageTitle}">Dashboard</h1>
+            <p class="text-slate-400 text-sm">Welcome back, <span th:text="${user.firstName}">User</span></p>
+        </div>
+        <a href="/dashboard/orders/new" class="btn-primary text-sm">New Request</a>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="glass-card"><p class="text-slate-400 text-sm">Recent Orders</p><p class="text-2xl font-bold mt-1" th:text="${recentOrders.totalElements}">0</p></div>
+        <div class="glass-card"><p class="text-slate-400 text-sm">Notifications</p><p class="text-2xl font-bold mt-1" th:text="${unreadNotifications}">0</p></div>
+        <div class="glass-card"><p class="text-slate-400 text-sm">Account</p><p class="text-lg font-semibold mt-1 text-brand-400">Active</p></div>
+        <div class="glass-card"><p class="text-slate-400 text-sm">Member Since</p><p class="text-lg font-semibold mt-1" th:text="${#temporals.format(user.createdTimestamp, 'MMM yyyy')}">Date</p></div>
+    </div>
+
+    <div class="glass-card">
+        <h2 class="font-bold mb-4">Recent Orders</h2>
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead><tr class="border-b border-white/10"><th class="text-left py-3">Order #</th><th class="text-left py-3">Status</th><th class="text-right py-3">Amount</th><th class="text-right py-3">Date</th></tr></thead>
+                <tbody>
+                    <tr th:each="order : ${recentOrders.content}" class="border-b border-white/5">
+                        <td class="py-3" th:text="${order.orderNumber}">SP-001</td>
+                        <td class="py-3"><span class="px-2 py-1 rounded-lg bg-brand-500/20 text-brand-400 text-xs" th:text="${order.status}">PENDING</span></td>
+                        <td class="py-3 text-right" th:text="'₹' + ${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')}">₹0</td>
+                        <td class="py-3 text-right text-slate-400" th:text="${#temporals.format(order.createdTimestamp, 'dd MMM yyyy')}">Date</td>
+                    </tr>
+                    <tr th:if="${recentOrders.empty}"><td colspan="4" class="py-8 text-center text-slate-400">No orders yet. <a href="/dashboard/orders/new" class="text-brand-400">Place your first order</a></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script th:replace="~{dashboard/layout :: dashboard-scripts}"></script>
+</body>
+</html>

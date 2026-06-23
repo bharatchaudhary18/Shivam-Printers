@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head(${pageTitle})}"></head>
+<body class="gradient-bg mesh-bg">
+<div th:replace="~{layout/base :: header}"></div>
+<main class="pt-24 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16 reveal"><h1 class="section-heading mb-4">Blog</h1><p class="text-slate-400">Design tips, trends, and industry insights</p></div>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <a th:each="post : ${posts.content}" th:href="@{/blog/{slug}(slug=${post.slug})}" class="glass-card group hover:scale-[1.02] transition-transform reveal block">
+                <div class="aspect-video rounded-xl bg-brand-900/30 mb-4 overflow-hidden">
+                    <img th:if="${post.coverImageUrl}" th:src="${post.coverImageUrl}" th:alt="${post.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+                </div>
+                <p class="text-brand-400 text-xs mb-2" th:text="${post.author}">Author</p>
+                <h2 class="font-bold text-lg mb-2 group-hover:text-brand-400 transition" th:text="${post.title}">Title</h2>
+                <p class="text-slate-400 text-sm" th:text="${post.excerpt}">Excerpt</p>
+            </a>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layout/base :: footer}"></div>
+<script th:replace="~{layout/base :: scripts}"></script>
+</body>
+</html>

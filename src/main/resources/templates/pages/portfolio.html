@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/base :: head(${pageTitle})}"></head>
+<body class="gradient-bg mesh-bg">
+<div th:replace="~{layout/base :: header}"></div>
+<main class="pt-24 pb-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12 reveal">
+            <h1 class="section-heading mb-4">Our Portfolio</h1>
+            <p class="text-slate-400">Explore our finest design and printing projects</p>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="flex flex-col md:flex-row gap-4 mb-12 reveal">
+            <form action="/portfolio" method="get" class="flex-1">
+                <input type="text" name="q" th:value="${searchQuery}" placeholder="Search portfolio..." class="input-field"/>
+            </form>
+            <div class="flex flex-wrap gap-2">
+                <a href="/portfolio" class="btn-secondary text-sm px-4 py-2" th:classappend="${activeCategory == null ? 'bg-brand-600' : ''}">All</a>
+                <a th:each="cat : ${categories}" th:href="@{/portfolio(category=${cat.slug})}"
+                   th:text="${cat.name}" class="btn-secondary text-sm px-4 py-2"
+                   th:classappend="${activeCategory == cat.slug ? 'bg-brand-600' : ''}">Category</a>
+            </div>
+        </div>
+
+        <!-- Masonry Gallery -->
+        <div class="masonry-grid reveal">
+            <a th:each="item : ${portfolios.content}" th:href="@{/portfolio/{slug}(slug=${item.slug})}"
+               th:attr="data-category=${item.categorySlug}"
+               class="masonry-item portfolio-card glass-card p-0 overflow-hidden block zoom-container">
+                <img th:src="${item.imageUrl}" th:alt="${item.title}" class="w-full object-cover" data-zoom="true"/>
+                <div class="p-4">
+                    <p class="text-brand-400 text-xs mb-1" th:text="${item.categoryName}">Category</p>
+                    <h3 class="font-semibold" th:text="${item.title}">Title</h3>
+                </div>
+            </a>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center gap-2 mt-12" th:if="${portfolios.totalPages > 1}">
+            <a th:each="i : ${#numbers.sequence(0, portfolios.totalPages - 1)}"
+               th:href="@{/portfolio(page=${i}, category=${activeCategory}, q=${searchQuery})}"
+               th:text="${i + 1}"
+               th:class="${i == portfolios.number ? 'btn-primary px-4 py-2' : 'btn-secondary px-4 py-2'}">1</a>
+        </div>
+    </div>
+</main>
+<div th:replace="~{layout/base :: footer}"></div>
+<script th:replace="~{layout/base :: scripts}"></script>
+</body>
+</html>
