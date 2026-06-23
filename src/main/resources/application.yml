@@ -115,13 +115,9 @@
 #    root: WARN
 #    com.shivamprinters: INFO
 
-  ```yaml
 spring:
   application:
     name: shivam-printers
-
-  profiles:
-    active: ${SPRING_PROFILES_ACTIVE:dev}
 
   datasource:
     url: ${DB_URL:jdbc:postgresql://localhost:5432/shivam_printers}
@@ -131,7 +127,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     show-sql: false
     properties:
       hibernate:
@@ -139,9 +135,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
   flyway:
-    enabled: true
-    locations: classpath:db/migration
-    baseline-on-migrate: true
+    enabled: false
 
   servlet:
     multipart:
@@ -161,7 +155,7 @@ spring:
             enable: true
 
   thymeleaf:
-    cache: false
+    cache: true
     prefix: classpath:/templates/
     suffix: .html
 
@@ -176,9 +170,11 @@ app:
   tagline: Premium Printing & Graphic Design
   upload-dir: uploads
   base-url: ${APP_BASE_URL:http://localhost:8080}
+
   admin:
     email: admin@shivamprinters.com
     password: Admin@123456
+
   mail:
     from: noreply@shivamprinters.com
     enabled: false
@@ -198,38 +194,8 @@ management:
 springdoc:
   api-docs:
     path: /api/docs
+
   swagger-ui:
     path: /api/swagger-ui.html
     tags-sorter: alpha
     operations-sorter: alpha
-
----
-spring:
-  config:
-    activate:
-      on-profile: dev
-
-  jpa:
-    show-sql: true
-
-logging:
-  level:
-    com.shivamprinters: DEBUG
-
----
-spring:
-  config:
-    activate:
-      on-profile: prod
-
-  thymeleaf:
-    cache: true
-
-  jpa:
-    show-sql: false
-
-logging:
-  level:
-    root: WARN
-    com.shivamprinters: INFO
-
