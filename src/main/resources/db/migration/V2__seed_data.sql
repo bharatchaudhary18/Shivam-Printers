@@ -1,7 +1,7 @@
 -- Seed roles
-INSERT INTO roles (name, description) VALUES
-('ADMIN', 'Administrator with full access'),
-('CUSTOMER', 'Customer with dashboard access');
+INSERT INTO roles (name, description, created_timestamp, updated_timestamp) VALUES
+('ADMIN', 'Administrator with full access', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+('CUSTOMER', 'Customer with dashboard access', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Seed services
 INSERT INTO services (name, slug, description, short_description, icon, base_price, featured, sort_order) VALUES
